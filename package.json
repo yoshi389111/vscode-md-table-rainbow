@@ -1,5 +1,6 @@
 {
   "name": "markdown-table-rainbow",
+  "icon": "assets/icon.png",
   "displayName": "markdown-table-rainbow",
   "description": "Color each column of the markdown table.",
   "publisher": "yoshi389111",

@@ -1,8 +1,6 @@
 import * as vscode from 'vscode';
 
 export const activate = (context: vscode.ExtensionContext): void => {
-    const REGEX_LINE = /^([ \t]*>)*[ \t]*\|[^\r\n]*$/mg;
-    const REGEX_COLUMN = /\|[^|\r\n]*(?=\|)/g;
     const config = vscode.workspace.getConfiguration('markdownTableRainbow');
     const updateDelay: number = config['updateDelay'] || 500;
     const colors: string[] = config['colors'] || [
@@ -16,6 +14,8 @@ export const activate = (context: vscode.ExtensionContext): void => {
     );
     let activeEditor = vscode.window.activeTextEditor;
 
+    const REGEX_LINE = /^([ \t]*>)*[ \t]*\|[^\r\n]*$/mg;
+    const REGEX_COLUMN = /\|[^|\r\n]*(?=\|)/g;
     const updateDecorations = (): void => {
         const editor = activeEditor;
         if (!editor) {
@@ -24,6 +24,7 @@ export const activate = (context: vscode.ExtensionContext): void => {
         const options: vscode.DecorationOptions[][] = decorationTypes.map(_ => []);
         Array.from(editor.document.getText().matchAll(REGEX_LINE)).forEach(matchLine => {
             Array.from(matchLine[0].matchAll(REGEX_COLUMN)).forEach((matchColumn, index) => {
+                // see https://github.com/microsoft/TypeScript/issues/36788
                 const startPos = (matchLine.index || 0) + (matchColumn.index || 0);
                 const range = new vscode.Range(
                     editor.document.positionAt(startPos),

@@ -20,9 +20,9 @@ However, you can also change:
   // An array of color strings (hex, rgba, rgb) for each column.
   // You can specify any number of colors. used cyclically.
   "markdownTableRainbow.colors": [
+    "rgba(79,236,236,0.1)",
     "rgba(255,255,63,0.1)",
     "rgba(127,255,127,0.1)",
-    "rgba(255,127,255,0.1)",
-    "rgba(79,236,236,0.1)"
+    "rgba(255,127,255,0.1)"
   ]
 ```

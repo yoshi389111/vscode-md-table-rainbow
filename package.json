@@ -32,10 +32,10 @@
                 "markdownTableRainbow.colors": {
                     "type": "array",
                     "default": [
+                        "rgba(79,236,236,0.1)",
                         "rgba(255,255,63,0.1)",
                         "rgba(127,255,127,0.1)",
-                        "rgba(255,127,255,0.1)",
-                        "rgba(79,236,236,0.1)"
+                        "rgba(255,127,255,0.1)"
                     ],
                     "description": "An array of color strings (hex, rgba, rgb) for each column."
                 }

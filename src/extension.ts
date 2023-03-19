@@ -4,10 +4,10 @@ export const activate = (context: vscode.ExtensionContext): void => {
     const config = vscode.workspace.getConfiguration('markdownTableRainbow');
     const updateDelay: number = config['updateDelay'] || 500;
     const colors: string[] = config['colors'] || [
+        "rgba(79,236,236,0.1)",
         "rgba(255,255,64,0.1)",
         "rgba(127,255,127,0.1)",
         "rgba(255,127,255,0.1)",
-        "rgba(79,236,236,0.1)"
     ];
     const decorationTypes = colors.map(backgroundColor =>
         vscode.window.createTextEditorDecorationType({ backgroundColor })

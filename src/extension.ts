@@ -10,7 +10,10 @@ export const activate = (context: vscode.ExtensionContext): void => {
         "rgba(255,127,255,0.1)",
     ];
     const decorationTypes = colors.map(backgroundColor =>
-        vscode.window.createTextEditorDecorationType({ backgroundColor })
+        vscode.window.createTextEditorDecorationType({
+            backgroundColor,
+            rangeBehavior: vscode.DecorationRangeBehavior.ClosedOpen,
+        })
     );
     context.subscriptions.push(...decorationTypes);
     let activeEditor = vscode.window.activeTextEditor;

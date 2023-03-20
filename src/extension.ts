@@ -29,7 +29,7 @@ export const activate = (context: vscode.ExtensionContext): void => {
         Array.from(editor.document.getText().matchAll(REGEX_LINE)).forEach(matchLine => {
             Array.from(matchLine[0].matchAll(REGEX_COLUMN)).forEach((matchColumn, index) => {
                 // see https://github.com/microsoft/TypeScript/issues/36788
-                const startPos = (matchLine.index || 0) + (matchColumn.index || 0);
+                const startPos = matchLine.index! + matchColumn.index!;
                 const range = new vscode.Range(
                     editor.document.positionAt(startPos),
                     editor.document.positionAt(startPos + matchColumn[0].length)

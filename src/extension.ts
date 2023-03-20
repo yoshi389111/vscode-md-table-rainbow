@@ -12,6 +12,7 @@ export const activate = (context: vscode.ExtensionContext): void => {
     const decorationTypes = colors.map(backgroundColor =>
         vscode.window.createTextEditorDecorationType({ backgroundColor })
     );
+    context.subscriptions.push(...decorationTypes);
     let activeEditor = vscode.window.activeTextEditor;
 
     const REGEX_LINE = /^([ \t]*>)*[ \t]*\|[^\r\n]*$/mg;

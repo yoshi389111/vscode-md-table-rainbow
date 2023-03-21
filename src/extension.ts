@@ -16,15 +16,10 @@ export const activate = (context: vscode.ExtensionContext): void => {
         })
     );
     context.subscriptions.push(...decorationTypes);
-    let activeEditor = vscode.window.activeTextEditor;
 
     const REGEX_LINE = /^([ \t]*>)*[ \t]*\|[^\r\n]*$/mg;
     const REGEX_COLUMN = /\|[^|\r\n]*(?=\|)/g;
-    const updateDecorations = (): void => {
-        const editor = activeEditor;
-        if (!editor) {
-            return;
-        }
+    const updateDecorations = (editor: vscode.TextEditor): void => {
         const options: vscode.DecorationOptions[][] = decorationTypes.map(_ => []);
         Array.from(editor.document.getText().matchAll(REGEX_LINE)).forEach(matchLine => {
             Array.from(matchLine[0].matchAll(REGEX_COLUMN)).forEach((matchColumn, index) => {
@@ -42,6 +37,14 @@ export const activate = (context: vscode.ExtensionContext): void => {
         );
     };
 
+    let activeEditor = vscode.window.activeTextEditor;
+    const updateDecorationsIfPossible = (): void => {
+        const editor = activeEditor;
+        if (editor) {
+            updateDecorations(editor);
+        }
+    };
+
     let timer: NodeJS.Timer | undefined = undefined;
     const triggerUpdateDecorations = (throttle = false): void => {
         if (timer) {
@@ -49,9 +52,9 @@ export const activate = (context: vscode.ExtensionContext): void => {
             timer = undefined;
         }
         if (throttle) {
-            timer = setTimeout(updateDecorations, updateDelay);
+            timer = setTimeout(updateDecorationsIfPossible, updateDelay);
         } else {
-            updateDecorations();
+            updateDecorationsIfPossible();
         }
     };
 
@@ -61,9 +64,7 @@ export const activate = (context: vscode.ExtensionContext): void => {
 
     vscode.window.onDidChangeActiveTextEditor(editor => {
         activeEditor = editor;
-        if (editor) {
-            triggerUpdateDecorations();
-        }
+        triggerUpdateDecorations();
     }, null, context.subscriptions);
 
     vscode.workspace.onDidChangeTextDocument(event => {

@@ -1,5 +1,10 @@
 # Change Log
 
+## 2023-03-22, 0.0.3 release
+
+- Fixed resource dispose leak
+- Change rangeBehavior of colored ranges
+
 ## 2023-03-20, 0.0.2 release
 
 - Changed default colors

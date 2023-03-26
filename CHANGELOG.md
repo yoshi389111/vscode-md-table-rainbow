@@ -1,5 +1,9 @@
 # Change Log
 
+## 2023-03-28, 0.0.4 release
+
+- Settings changes now apply immediately.
+
 ## 2023-03-22, 0.0.3 release
 
 - Fixed resource dispose leak

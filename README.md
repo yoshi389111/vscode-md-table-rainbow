@@ -1,6 +1,6 @@
 # markdown-table-rainbow
 
-A extension that colorizes table columns in Markdown for clarity.
+An extension that colorizes table columns in Markdown for clarity.
 
 ## Features
 

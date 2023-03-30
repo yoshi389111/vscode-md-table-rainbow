@@ -52,11 +52,18 @@ export const activate = (context: vscode.ExtensionContext): void => {
     };
     createResources(true);
 
-    const REGEX_LINE = /^([ \t]*>)*[ \t]*\|[^\r\n]*$/mg;
-    const REGEX_COLUMN = /\|[^|\r\n]*(?=\|)/g;
+    /** onLanguage list defined in "activationEvents" of package.json */
+    const onLanguages = (context.extension.packageJSON["activationEvents"] as string[])
+        .filter(it => it.startsWith("onLanguage:"))
+        .map(it => it.substring("onLanguage:".length));
     const updateDecorations = (editor: vscode.TextEditor): void => {
+        if (!onLanguages.includes(editor.document.languageId)) {
+            return;
+        }
         const options: vscode.DecorationOptions[][] = decorationTypes.map(_ => []);
+        const REGEX_LINE = /^([ \t]*>)*[ \t]*\|[^\r\n]*$/mg;
         Array.from(editor.document.getText().matchAll(REGEX_LINE)).forEach(matchLine => {
+            const REGEX_COLUMN = /\|[^|\r\n]*(?=\|)/g;
             Array.from(matchLine[0].matchAll(REGEX_COLUMN)).forEach((matchColumn, index) => {
                 // `match.index` returned by `matchAll()` must exist.
                 // ref. https://github.com/microsoft/TypeScript/issues/36788

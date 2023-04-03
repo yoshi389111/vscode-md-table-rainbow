@@ -1,5 +1,9 @@
 # Change Log
 
+## 2023-04-04, 0.0.6 release
+
+- Add English and Japanese resources for l10n.
+
 ## 2023-03-30, 0.0.5 release
 
 - Fixed to work only in markdown.

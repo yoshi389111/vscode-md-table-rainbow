@@ -1,0 +1,5 @@
+{
+    "markdownTableRainbow.description": "マークダウンのテーブルの各カラムに色を付けます。",
+    "markdownTableRainbow.updateDelay": "カラムの色を更新するまでのミリ秒単位の遅延時間。",
+    "markdownTableRainbow.colors": "各カラムの色文字列 (hex, rgba, rgb) の配列。"
+}

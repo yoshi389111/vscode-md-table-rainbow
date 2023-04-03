@@ -1,0 +1,3 @@
+{
+    "Invalid value in 'markdownTableRainbow.colors'.\nSpecify the color string in \"#RRGGBB\", \"rgb(R,G,B)\" or \"rgba(R,G,B,A)\" format.": "Invalid value in 'markdownTableRainbow.colors'.\nSpecify the color string in \"#RRGGBB\", \"rgb(R,G,B)\" or \"rgba(R,G,B,A)\" format."
+}

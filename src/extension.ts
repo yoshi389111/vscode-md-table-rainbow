@@ -27,8 +27,7 @@ export const activate = (context: vscode.ExtensionContext): void => {
         if (!colors.every(it => it.match(REGEX_COLOR))) {
             if (showError) {
                 vscode.window.showErrorMessage(
-                    "Invalid value in 'markdownTableRainbow.colors'.\n" +
-                    "Specify the color string in \"#RRGGBB\", \"rgb(R,G,B)\" or \"rgba(R,G,B,A)\" format."
+                    vscode.l10n.t("Invalid value in 'markdownTableRainbow.colors'.\nSpecify the color string in \"#RRGGBB\", \"rgb(R,G,B)\" or \"rgba(R,G,B,A)\" format.")
                 );
             }
             return DEFAULT_COLORS;

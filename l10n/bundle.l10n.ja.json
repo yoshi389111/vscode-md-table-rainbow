@@ -1,0 +1,3 @@
+{
+    "Invalid value in 'markdownTableRainbow.colors'.\nSpecify the color string in \"#RRGGBB\", \"rgb(R,G,B)\" or \"rgba(R,G,B,A)\" format.": "項目 'markdownTableRainbow.colors' の値が誤っています。\n色コードは \"#RRGGBB\", \"rgb(R,G,B)\" または \"rgba(R,G,B,A)\" の形式で指定してください。"
+}

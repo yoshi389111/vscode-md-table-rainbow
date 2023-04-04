@@ -1,5 +1,9 @@
 # Change Log
 
+## 2023-04-04, 0.0.7 release
+
+- Fixed package.json
+
 ## 2023-04-04, 0.0.6 release
 
 - Add English and Japanese resources for l10n.

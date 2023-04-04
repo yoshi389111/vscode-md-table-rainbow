@@ -2,9 +2,9 @@
     "name": "markdown-table-rainbow",
     "icon": "assets/icon.png",
     "displayName": "markdown-table-rainbow",
-    "description": "%markdownTableRainbow.description",
+    "description": "%markdownTableRainbow.description%",
     "publisher": "yoshi389111",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "license": "MIT",
     "l10n": "./l10n",
     "repository": {

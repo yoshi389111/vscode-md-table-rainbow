@@ -139,7 +139,7 @@ export const activate = (context: vscode.ExtensionContext): void => {
 
     vscode.window.onDidChangeTextEditorSelection(_ => {
         if (cursorDecoType) {
-            triggerUpdateDecorations();
+            triggerUpdateDecorations(true);
         }
     }, null, context.subscriptions);
 

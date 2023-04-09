@@ -4,7 +4,7 @@
     "displayName": "markdown-table-rainbow",
     "description": "%markdownTableRainbow.description%",
     "publisher": "yoshi389111",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "license": "MIT",
     "l10n": "./l10n",
     "repository": {

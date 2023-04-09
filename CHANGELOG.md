@@ -1,5 +1,9 @@
 # Change Log
 
+## 2023-04-09, 0.0.8 release
+
+- Added cursor column color.
+
 ## 2023-04-04, 0.0.7 release
 
 - Fixed package.json

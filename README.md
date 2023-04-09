@@ -24,5 +24,8 @@ However, you can also change:
     "rgba(255,255,63,0.1)",
     "rgba(127,255,127,0.1)",
     "rgba(255,127,255,0.1)"
-  ]
+  ],
+  // Cursor column color strings (hex, rgba, rgb).
+  // This item is optional.
+  "markdownTableRainbow.cursorColor": ""
 ```

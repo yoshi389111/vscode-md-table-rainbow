@@ -39,6 +39,13 @@
                         "rgba(255,127,255,0.1)"
                     ],
                     "description": "%markdownTableRainbow.colors%"
+                },
+                "markdownTableRainbow.cursorColor": {
+                    "required": [],
+                    "type": "string",
+                    "description": "%markdownTableRainbow.cursorColor%",
+                    "pattern": "^(#[0-9a-fA-F]{6})|(rgb\\(\\s*(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})\\s*\\))|(rgba\\(\\s*(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d{2}|\\d{1,2})\\s*,\\s*[01](\\.\\d+)?\\s*\\))|()$",
+                    "patternErrorMessage": "%markdownTableRainbow.regexp.patternErrorMessage%"
                 }
             }
         }

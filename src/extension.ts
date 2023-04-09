@@ -36,9 +36,9 @@ export const activate = (context: vscode.ExtensionContext): void => {
     };
 
     const decorationTypes: vscode.TextEditorDecorationType[] = [];
+    let cursorDecoType: vscode.TextEditorDecorationType | undefined = undefined;
     const createResources = (showError = false): void => {
         decorationTypes.forEach(it => dispose(it));
-
         decorationTypes.length = 0;
         getColors(showError).forEach(color => decorationTypes.push(
             vscode.window.createTextEditorDecorationType({
@@ -46,8 +46,21 @@ export const activate = (context: vscode.ExtensionContext): void => {
                 rangeBehavior: vscode.DecorationRangeBehavior.ClosedOpen,
             }))
         );
-
         context.subscriptions.push(...decorationTypes);
+
+        if (cursorDecoType) {
+            dispose(cursorDecoType);
+            cursorDecoType = undefined;
+        }
+        const cursorColor = getConfig().get<string>('cursorColor', '');
+        if (cursorColor) {
+            cursorDecoType = vscode.window.createTextEditorDecorationType({
+                backgroundColor: cursorColor,
+                rangeBehavior: vscode.DecorationRangeBehavior.ClosedOpen,
+            });
+            context.subscriptions.push(cursorDecoType);
+        }
+
     };
     createResources(true);
 
@@ -59,8 +72,20 @@ export const activate = (context: vscode.ExtensionContext): void => {
         if (!onLanguages.includes(editor.document.languageId)) {
             return;
         }
-        const options: vscode.DecorationOptions[][] = decorationTypes.map(_ => []);
+
+        const cursorColor = getConfig().get<string>('cursorColor', '');
         const REGEX_LINE = /^([ \t]*>)*[ \t]*\|[^\r\n]*$/mg;
+        const cursor = editor.selection.active;
+        const textLine = editor.document.lineAt(cursor.line).text;
+        const cursorColumn = (
+                cursorColor
+                && textLine.match(REGEX_LINE)
+                && textLine.substring(cursor.character).includes('|')
+            )
+            ? (textLine.substring(0, cursor.character).match(/\|/g) || []).length - 1
+            : -1;
+        const options: vscode.DecorationOptions[][] = decorationTypes.map(_ => []);
+        const cursorOpt: vscode.DecorationOptions[] = [];
         Array.from(editor.document.getText().matchAll(REGEX_LINE)).forEach(matchLine => {
             const REGEX_COLUMN = /\|[^|\r\n]*(?=\|)/g;
             Array.from(matchLine[0].matchAll(REGEX_COLUMN)).forEach((matchColumn, index) => {
@@ -71,12 +96,19 @@ export const activate = (context: vscode.ExtensionContext): void => {
                     editor.document.positionAt(startPos),
                     editor.document.positionAt(startPos + matchColumn[0].length)
                 );
-                options[index % options.length].push({ range });
+                if (index === cursorColumn) {
+                    cursorOpt.push({ range });
+                } else {
+                    options[index % options.length].push({ range });
+                }
             });
         });
         decorationTypes.forEach((decorationType, index) =>
             editor.setDecorations(decorationType, options[index])
         );
+        if (cursorDecoType) {
+            editor.setDecorations(cursorDecoType, cursorOpt);
+        }
     };
 
     const updateDecorationsIfPossible = (): void => {
@@ -103,6 +135,12 @@ export const activate = (context: vscode.ExtensionContext): void => {
 
     vscode.window.onDidChangeActiveTextEditor(_ => {
         triggerUpdateDecorations();
+    }, null, context.subscriptions);
+
+    vscode.window.onDidChangeTextEditorSelection(_ => {
+        if (cursorDecoType) {
+            triggerUpdateDecorations();
+        }
     }, null, context.subscriptions);
 
     vscode.workspace.onDidChangeTextDocument(event => {

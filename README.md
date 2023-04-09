@@ -29,3 +29,8 @@ However, you can also change:
   // This item is optional.
   "markdownTableRainbow.cursorColor": ""
 ```
+
+## Demo
+
+![demo](assets/demo.gif)
+

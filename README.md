@@ -30,6 +30,8 @@ However, you can also change:
   "markdownTableRainbow.cursorColor": ""
 ```
 
+By defining a color in `markdownTableRainbow.cursorColor` you can colorize the table column where the cursor is.
+
 ## Demo
 
 ![demo](assets/demo.gif)

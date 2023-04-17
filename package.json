@@ -27,7 +27,7 @@
             "properties": {
                 "markdownTableRainbow.updateDelay": {
                     "type": "number",
-                    "default": 500,
+                    "default": 100,
                     "description": "%markdownTableRainbow.updateDelay%"
                 },
                 "markdownTableRainbow.colors": {

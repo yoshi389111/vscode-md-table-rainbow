@@ -16,7 +16,7 @@ However, you can also change:
 ```js
   // Delay time in milliseconds before updating colors.
   // Smaller values will color faster, but will increase processing cost.
-  "markdownTableRainbow.updateDelay": 500,
+  "markdownTableRainbow.updateDelay": 100,
   // An array of color strings (hex, rgba, rgb) for each column.
   // You can specify any number of colors. used cyclically.
   "markdownTableRainbow.colors": [

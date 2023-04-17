@@ -121,7 +121,7 @@ export const activate = (context: vscode.ExtensionContext): void => {
             timer = undefined;
         }
         if (throttle) {
-            const updateDelay = getConfig().get<number>('updateDelay', 500);
+            const updateDelay = getConfig().get<number>('updateDelay', 100);
             timer = setTimeout(updateDecorationsIfPossible, updateDelay);
         } else {
             updateDecorationsIfPossible();

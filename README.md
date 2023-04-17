@@ -26,11 +26,8 @@ However, you can also change:
     "rgba(255,127,255,0.1)"
   ],
   // Cursor column color strings (hex, rgba, rgb).
-  // This item is optional.
-  "markdownTableRainbow.cursorColor": ""
+  "markdownTableRainbow.cursorColor": "rgba(100,50,180,0.8)",
 ```
-
-By defining a color in `markdownTableRainbow.cursorColor` you can colorize the table column where the cursor is.
 
 ## Demo
 

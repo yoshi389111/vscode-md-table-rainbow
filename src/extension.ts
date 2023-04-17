@@ -52,14 +52,12 @@ export const activate = (context: vscode.ExtensionContext): void => {
             dispose(cursorDecoType);
             cursorDecoType = undefined;
         }
-        const cursorColor = getConfig().get<string>('cursorColor', '');
-        if (cursorColor) {
-            cursorDecoType = vscode.window.createTextEditorDecorationType({
-                backgroundColor: cursorColor,
-                rangeBehavior: vscode.DecorationRangeBehavior.ClosedOpen,
-            });
-            context.subscriptions.push(cursorDecoType);
-        }
+        const cursorColor = getConfig().get<string>('cursorColor', 'rgba(100,50,180,0.8)');
+        cursorDecoType = vscode.window.createTextEditorDecorationType({
+            backgroundColor: cursorColor,
+            rangeBehavior: vscode.DecorationRangeBehavior.ClosedOpen,
+        });
+        context.subscriptions.push(cursorDecoType);
 
     };
     createResources(true);
@@ -73,13 +71,11 @@ export const activate = (context: vscode.ExtensionContext): void => {
             return;
         }
 
-        const cursorColor = getConfig().get<string>('cursorColor', '');
         const REGEX_LINE = /^([ \t]*>)*[ \t]*\|[^\r\n]*$/mg;
         const cursor = editor.selection.active;
         const textLine = editor.document.lineAt(cursor.line).text;
         const cursorColumn = (
-                cursorColor
-                && textLine.match(REGEX_LINE)
+                textLine.match(REGEX_LINE)
                 && textLine.substring(cursor.character).includes('|')
             )
             ? (textLine.substring(0, cursor.character).match(/\|/g) || []).length - 1

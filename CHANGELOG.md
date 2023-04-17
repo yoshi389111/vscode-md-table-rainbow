@@ -1,5 +1,11 @@
 # Change Log
 
+## 2023-04-17, 1.0.0 release
+
+- changed default value of updateDelay to 100
+- changed cursorColor to required
+- added demo.gif
+
 ## 2023-04-09, 0.0.9 release
 
 - Added delay time when changing cursor column color.

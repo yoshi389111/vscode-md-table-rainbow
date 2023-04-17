@@ -6,7 +6,7 @@ An extension that colorizes table columns in Markdown for clarity.
 
 This extension colors by columns in markdown tables.
 
-![screenshot](assets/screenshot.png)
+![demo](assets/demo.gif)
 
 ## Extension Settings
 
@@ -28,8 +28,3 @@ However, you can also change:
   // Cursor column color strings (hex, rgba, rgb).
   "markdownTableRainbow.cursorColor": "rgba(100,50,180,0.8)",
 ```
-
-## Demo
-
-![demo](assets/demo.gif)
-

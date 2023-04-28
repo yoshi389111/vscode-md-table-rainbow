@@ -1,5 +1,9 @@
 # Change Log
 
+## 2023-04-29, 1.0.2 release
+
+- fix to determine if the cursor position is a table
+
 ## 2023-04-28, 1.0.1 release
 
 - Fix to handle escaped pipes correctly

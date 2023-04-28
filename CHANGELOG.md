@@ -1,5 +1,9 @@
 # Change Log
 
+## 2023-04-28, 1.0.1 release
+
+- Fix to handle escaped pipes correctly
+
 ## 2023-04-17, 1.0.0 release
 
 - changed default value of updateDelay to 100

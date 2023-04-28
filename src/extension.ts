@@ -72,18 +72,17 @@ export const activate = (context: vscode.ExtensionContext): void => {
         }
 
         const REGEX_LINE = /^([ \t]*>)*[ \t]*\|[^\r\n]*$/mg;
+        const REGEX_COLUMN = /\|((\\.)|[^\\|])*(?=\|)/g;
         const cursor = editor.selection.active;
         const textLine = editor.document.lineAt(cursor.line).text;
-        const cursorColumn = (
-                textLine.match(REGEX_LINE)
-                && textLine.substring(cursor.character).includes('|')
-            )
-            ? (textLine.substring(0, cursor.character).match(/\|/g) || []).length - 1
-            : -1;
+        const cursorColumn = Array.from(textLine.matchAll(REGEX_COLUMN))
+            .findIndex(match =>
+                match.index! < cursor.character
+                && cursor.character <= match.index! + match[0].length
+            );
         const options: vscode.DecorationOptions[][] = decorationTypes.map(_ => []);
         const cursorOpt: vscode.DecorationOptions[] = [];
         Array.from(editor.document.getText().matchAll(REGEX_LINE)).forEach(matchLine => {
-            const REGEX_COLUMN = /\|[^|\r\n]*(?=\|)/g;
             Array.from(matchLine[0].matchAll(REGEX_COLUMN)).forEach((matchColumn, index) => {
                 // `match.index` returned by `matchAll()` must exist.
                 // ref. https://github.com/microsoft/TypeScript/issues/36788

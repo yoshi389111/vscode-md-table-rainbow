@@ -75,11 +75,12 @@ export const activate = (context: vscode.ExtensionContext): void => {
         const REGEX_COLUMN = /\|((\\.)|[^\\|])*(?=\|)/g;
         const cursor = editor.selection.active;
         const textLine = editor.document.lineAt(cursor.line).text;
-        const cursorColumn = Array.from(textLine.matchAll(REGEX_COLUMN))
-            .findIndex(match =>
+        const cursorColumn = textLine.match(REGEX_LINE)
+            ? Array.from(textLine.matchAll(REGEX_COLUMN)).findIndex(match =>
                 match.index! < cursor.character
                 && cursor.character <= match.index! + match[0].length
-            );
+            )
+            : -1;
         const options: vscode.DecorationOptions[][] = decorationTypes.map(_ => []);
         const cursorOpt: vscode.DecorationOptions[] = [];
         Array.from(editor.document.getText().matchAll(REGEX_LINE)).forEach(matchLine => {

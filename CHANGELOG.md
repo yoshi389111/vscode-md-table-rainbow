@@ -1,5 +1,10 @@
 # Change Log
 
+## 2025-03-06, 1.1.0 release
+
+- MDX file support
+- Added `markdownTableRainbow.cursorColorEnabled` flag
+
 ## 2023-04-29, 1.0.2 release
 
 - fix to determine if the cursor position is a table

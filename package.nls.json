@@ -2,6 +2,7 @@
     "markdownTableRainbow.description": "Color each column of the markdown table.",
     "markdownTableRainbow.updateDelay": "Delay time in milliseconds before updating colors.",
     "markdownTableRainbow.colors": "An array of color strings (hex, rgba, rgb) for each column.",
+    "markdownTableRainbow.cursorColorEnabled": "Enable highlighting of the cursor column.",
     "markdownTableRainbow.cursorColor": "Cursor column color strings (hex, rgba, rgb).",
     "markdownTableRainbow.regexp.patternErrorMessage": "Specify the color string in \"#RRGGBB\", \"rgb(R,G,B)\" or \"rgba(R,G,B,A)\" format."
 }

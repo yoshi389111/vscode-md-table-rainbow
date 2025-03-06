@@ -2,6 +2,7 @@
     "markdownTableRainbow.description": "マークダウンのテーブルの各カラムに色を付けます。",
     "markdownTableRainbow.updateDelay": "カラムの色を更新するまでのミリ秒単位の遅延時間。",
     "markdownTableRainbow.colors": "各カラムの色文字列 (hex, rgba, rgb) の配列。",
+    "markdownTableRainbow.cursorColorEnabled": "カーソル列の強調表示を有効にする",
     "markdownTableRainbow.cursorColor": "カーソルのある列の色文字列 (hex, rgba, rgb).",
     "markdownTableRainbow.regexp.patternErrorMessage": "色コードは \"#RRGGBB\", \"rgb(R,G,B)\" または \"rgba(R,G,B,A)\" の形式で指定してください。"
 }

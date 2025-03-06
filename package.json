@@ -41,6 +41,11 @@
                     ],
                     "description": "%markdownTableRainbow.colors%"
                 },
+                "markdownTableRainbow.cursorColorEnabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "%markdownTableRainbow.cursorColorEnabled%"
+                },
                 "markdownTableRainbow.cursorColor": {
                     "type": "string",
                     "default": "rgba(100,50,180,0.8)",

@@ -37,6 +37,7 @@ export const activate = (context: vscode.ExtensionContext): void => {
 
   const decorationTypes: vscode.TextEditorDecorationType[] = [];
   let cursorDecoType: vscode.TextEditorDecorationType | undefined = undefined;
+  let isCursorColorEnabled = true;
   const createResources = (showError = false): void => {
     decorationTypes.forEach(it => dispose(it));
     decorationTypes.length = 0;
@@ -52,6 +53,7 @@ export const activate = (context: vscode.ExtensionContext): void => {
       dispose(cursorDecoType);
       cursorDecoType = undefined;
     }
+    isCursorColorEnabled = getConfig().get<boolean>('cursorColorEnabled', true);
     const cursorColor = getConfig().get<string>('cursorColor', 'rgba(100,50,180,0.8)');
     cursorDecoType = vscode.window.createTextEditorDecorationType({
       backgroundColor: cursorColor,
@@ -92,7 +94,7 @@ export const activate = (context: vscode.ExtensionContext): void => {
           editor.document.positionAt(startPos),
           editor.document.positionAt(startPos + matchColumn[0].length)
         );
-        if (index === cursorColumn) {
+        if (isCursorColorEnabled && index === cursorColumn) {
           cursorOpt.push({ range });
         } else {
           options[index % options.length].push({ range });

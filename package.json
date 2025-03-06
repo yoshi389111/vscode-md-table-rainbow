@@ -18,7 +18,8 @@
         "Other"
     ],
     "activationEvents": [
-        "onLanguage:markdown"
+        "onLanguage:markdown",
+        "onLanguage:mdx"
     ],
     "main": "./dist/extension.js",
     "contributes": {

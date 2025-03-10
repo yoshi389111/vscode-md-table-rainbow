@@ -1,5 +1,9 @@
 # Change Log
 
+## 2025-03-11, 1.2.0 release
+
+- Added `markdownTableRainbow.singleTableMode` flag
+
 ## 2025-03-06, 1.1.0 release
 
 - MDX file support

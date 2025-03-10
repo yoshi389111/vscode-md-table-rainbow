@@ -38,6 +38,7 @@ export const activate = (context: vscode.ExtensionContext): void => {
   const decorationTypes: vscode.TextEditorDecorationType[] = [];
   let cursorDecoType: vscode.TextEditorDecorationType | undefined = undefined;
   let isCursorColorEnabled = true;
+  let isSingleTableMode = false;
   const createResources = (showError = false): void => {
     decorationTypes.forEach(it => dispose(it));
     decorationTypes.length = 0;
@@ -54,6 +55,7 @@ export const activate = (context: vscode.ExtensionContext): void => {
       cursorDecoType = undefined;
     }
     isCursorColorEnabled = getConfig().get<boolean>('cursorColorEnabled', true);
+    isSingleTableMode = getConfig().get<boolean>('singleTableMode', false);
     const cursorColor = getConfig().get<string>('cursorColor', 'rgba(100,50,180,0.8)');
     cursorDecoType = vscode.window.createTextEditorDecorationType({
       backgroundColor: cursorColor,
@@ -73,11 +75,37 @@ export const activate = (context: vscode.ExtensionContext): void => {
       return;
     }
 
-    const REGEX_LINE = /^([ \t]*>)*[ \t]*\|[^\r\n]*$/mg;
+    const REGEX_LINE = /^([ \t]*>)*[ \t]*\|[^\r\n]*$/;
+    const REGEX_LINE_GLOBAL = new RegExp(REGEX_LINE.source, "mg");
     const REGEX_COLUMN = /\|((\\.)|[^\\|])*(?=\|)/g;
+    const findActiveTableStartPosition = (editor: vscode.TextEditor) => {
+      for (let lineNo = editor.selection.active.line; 0 <= lineNo; lineNo--) {
+        const textLine = editor.document.lineAt(lineNo);
+        if (!REGEX_LINE.test(textLine.text)) {
+          return textLine.range.end;
+        }
+      }
+      return editor.document.positionAt(0);
+    };
+    const findActiveTableEndPosition = (editor: vscode.TextEditor) => {
+      const lineCount = editor.document.lineCount;
+      for (let lineNo = editor.selection.active.line; lineNo < lineCount; lineNo++) {
+        const textLine = editor.document.lineAt(lineNo);
+        if (!REGEX_LINE.test(textLine.text)) {
+          return textLine.range.start;
+        }
+      }
+      return editor.document.lineAt(lineCount-1).range.end;
+    };
+    const startPosOfTable = isSingleTableMode
+      ? findActiveTableStartPosition(editor)
+      : editor.document.positionAt(0);
+    const endPosOfTable = isSingleTableMode
+      ? findActiveTableEndPosition(editor)
+      : editor.document.positionAt(editor.document.getText().length);
     const cursor = editor.selection.active;
     const textLine = editor.document.lineAt(cursor.line).text;
-    const cursorColumn = textLine.match(REGEX_LINE)
+    const cursorColumn = textLine.match(REGEX_LINE_GLOBAL)
       ? Array.from(textLine.matchAll(REGEX_COLUMN)).findIndex(match =>
         match.index! < cursor.character
         && cursor.character <= match.index! + match[0].length
@@ -85,7 +113,7 @@ export const activate = (context: vscode.ExtensionContext): void => {
       : -1;
     const options: vscode.DecorationOptions[][] = decorationTypes.map(_ => []);
     const cursorOpt: vscode.DecorationOptions[] = [];
-    Array.from(editor.document.getText().matchAll(REGEX_LINE)).forEach(matchLine => {
+    Array.from(editor.document.getText().matchAll(REGEX_LINE_GLOBAL)).forEach(matchLine => {
       Array.from(matchLine[0].matchAll(REGEX_COLUMN)).forEach((matchColumn, index) => {
         // `match.index` returned by `matchAll()` must exist.
         // ref. https://github.com/microsoft/TypeScript/issues/36788
@@ -94,7 +122,12 @@ export const activate = (context: vscode.ExtensionContext): void => {
           editor.document.positionAt(startPos),
           editor.document.positionAt(startPos + matchColumn[0].length)
         );
-        if (isCursorColorEnabled && index === cursorColumn) {
+        if (
+          isCursorColorEnabled
+          && startPosOfTable.isBeforeOrEqual(range.start)
+          && endPosOfTable.isAfterOrEqual(range.end)
+          && index === cursorColumn
+        ) {
           cursorOpt.push({ range });
         } else {
           options[index % options.length].push({ range });

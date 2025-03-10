@@ -46,6 +46,11 @@
                     "default": true,
                     "description": "%markdownTableRainbow.cursorColorEnabled%"
                 },
+                "markdownTableRainbow.singleTableMode": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%markdownTableRainbow.singleTableMode%"
+                },
                 "markdownTableRainbow.cursorColor": {
                     "type": "string",
                     "default": "rgba(100,50,180,0.8)",
@@ -74,6 +79,7 @@
         "@types/vscode": "^1.76.0",
         "@typescript-eslint/eslint-plugin": "^5.53.0",
         "@typescript-eslint/parser": "^5.53.0",
+        "@vscode/l10n-dev": "^0.0.35",
         "@vscode/test-electron": "^2.2.3",
         "eslint": "^8.34.0",
         "glob": "^8.1.0",

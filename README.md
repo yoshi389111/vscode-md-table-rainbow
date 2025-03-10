@@ -27,6 +27,8 @@ However, you can also change:
   ],
   // Enable cursor column highlighting (default: true).
   "markdownTableRainbow.cursorColorEnabled": true,
+  // Highlight only one table (default: false).
+  "markdownTableRainbow.singleTableMode": false,
   // Cursor column color strings (hex, rgba, rgb).
   "markdownTableRainbow.cursorColor": "rgba(100,50,180,0.8)",
 ```

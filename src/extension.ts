@@ -14,7 +14,7 @@ export const activate = (context: vscode.ExtensionContext): void => {
 
   const DEFAULT_COLORS = [
     "rgba(79,236,236,0.1)",
-    "rgba(255,255,64,0.1)",
+    "rgba(255,255,63,0.1)",
     "rgba(127,255,127,0.1)",
     "rgba(255,127,255,0.1)",
   ];

@@ -18,11 +18,18 @@
 				{
 					"owner": "esbuild",
 					"fileLocation": ["relative", "${workspaceFolder}"],
-					"pattern": {
-						"regexp": "^✘ \\[ERROR\\] (.*?)$",
-						"message": 1
-					}
-				}
+					"pattern": [
+						{
+							"regexp": "^✘ \\\[ERROR\\\] (.*?)$",
+							"message": 1
+						},
+						{
+							"regexp": "^\\\\s+(.*?):(\\\\d+):(\\\\d+):$",
+							"file": 1,
+							"line": 2,
+							"column": 3
+						}
+						]
 			],
 			"isBackground": false,
 			"label": "npm: compile",

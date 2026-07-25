@@ -20,16 +20,17 @@
 					"fileLocation": ["relative", "${workspaceFolder}"],
 					"pattern": [
 						{
-							"regexp": "^✘ \\\[ERROR\\\] (.*?)$",
+							"regexp": "^✘ \\[ERROR\\] (.*?)$",
 							"message": 1
 						},
 						{
-							"regexp": "^\\\\s+(.*?):(\\\\d+):(\\\\d+):$",
+							"regexp": "^\\s+(.*?):(\\d+):(\\d+):$",
 							"file": 1,
 							"line": 2,
 							"column": 3
 						}
-						]
+					]
+				}
 			],
 			"isBackground": false,
 			"label": "npm: compile",

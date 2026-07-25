@@ -20,7 +20,7 @@
 					"fileLocation": ["relative", "${workspaceFolder}"],
 					"pattern": {
 						"regexp": "^✘ \\[ERROR\\] (.*?)$",
-						"message": 1,
+						"message": 1
 					}
 				}
 			],

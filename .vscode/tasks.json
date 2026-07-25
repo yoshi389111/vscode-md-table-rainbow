@@ -24,7 +24,7 @@
 					}
 				}
 			],
-			"isBackground": true,
+			"isBackground": false,
 			"label": "npm: compile",
 			"presentation": {
 				"group": "watch",
